@@ -1,0 +1,80 @@
+/* Display with Alt-D */
+@startuml GigaTchadGPT
+interface InterfacesGraphique{
+  
+}
+
+interface BaseDeDonnees{
+  data : Map[String, String]
+}
+
+note right of BaseDeDonnees: Dans cette BDD, se trouve les données \ninitiales ainsi que celle du document XML.
+
+interface Application{
+
+}
+
+interface AnalysePhrase{
+        renvoieReponse(s : String) : String
+}
+
+
+
+interface TolerenceFaute{
+        corrigerPhrase(phrase : String, baseDeDonnees : Map[String,String) : String
+}
+
+interface Discussion{
+        salutation(s : String) : List[String]
+}
+
+
+interface Traduction{
+        detecteLangue(entreeUtilisateur: List[String]): String
+}
+
+interface Linternaute{
+        bddRestaurants: Map[String, String]
+        adresseDe(entreeUtilisateur: List[String]): String
+        nomDe(entreeUtilisateur: List[String]): String
+}
+
+interface SyntheseVocal{
+        say(inputList: List[String]): Unit
+}
+
+interface bddInternational{
+   bddPolitesse: Map[String, String]
+   bddNomDeLangue: Map[String, String]
+   bddRecherche: Map[String, String]
+   bddOui: Map[String, String]
+   bddNon: Map[String, String]
+   bddChoix: Map[String, String]
+   bddResto: Map[String, String]
+   bddCrep: Map[String, String]
+   bddPiz: Map[String, String]
+   bddBonjour: Map[String, String]
+   bddAdr1: Map[String, String]
+   bddAdr2: Map[String, String]
+   bddJNCRP: Map[String, String]
+   bddDemande: Map[String, String]
+   bddDemandeLang: Map[String, String]
+   bddNbrReponse: Map[String, String]
+}
+
+Application --> AnalysePhrase
+Application -> InterfacesGraphique
+AnalysePhrase --> TolerenceFaute
+AnalysePhrase --> Linternaute
+Linternaute --> TolerenceFaute
+AnalysePhrase --> BaseDeDonnees
+AnalysePhrase --> Discussion
+AnalysePhrase --> Traduction
+Traduction --> bddInternational
+Traduction -> BaseDeDonnees
+TolerenceFaute -> BaseDeDonnees
+Discussion --> BaseDeDonnees
+InterfacesGraphique -> SyntheseVocal
+
+class Application <<(O,Orange)>>
+@enduml

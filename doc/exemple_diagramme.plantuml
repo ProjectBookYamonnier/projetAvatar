@@ -1,0 +1,53 @@
+/* Display with Alt-D */
+@startuml Navigateur
+interface URL{
+	valeur:String
+}
+
+interface Element{
+  clicable: Boolean
+  afficher(): Unit
+}
+
+URL <--  Element
+interface Image{
+	source: URL
+}
+interface Texte{
+	contenu: String
+}
+
+Element <|- Image
+Element <|-- Texte
+
+interface Page
+Page -> Element
+Page -> URL
+
+interface Navigateur{
+	charger(url:URL):Unit
+	arriere():Unit
+	avant():Unit
+}
+
+interface Historique{
+	avant():Unit
+	arriere():Unit
+}
+
+Historique -> Page
+
+Navigateur --> Historique
+Navigateur --> Page
+
+class MonNav <<(O,Orange)>>
+class MonHisto <<(O,Orange)>>
+
+MonNav --|> Navigateur
+MonHisto -|>Historique 
+MaPage --|> Page
+MonURL --|> URL
+MonImage --|> Image
+MonTexte -|> Texte
+
+@enduml
